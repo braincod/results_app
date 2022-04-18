@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PupilRMS</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="pupil_id">Pupil Id</string>
+    <string name="search_query">Search for Past Paper (use subject name or year)</string>
+    <string name="paper_name">Paper Name:</string>
+    <string name="intake">Intake:</string>
+    +
+</resources>

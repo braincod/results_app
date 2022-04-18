@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.visionarymindszm.examsresults.fragments.Home"
+        android:label="Home" >
+        <action
+            android:id="@+id/action_home2_to_results"
+            app:destination="@id/resultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.visionarymindszm.examsresults.fragments.Results"
+        android:label="Results" >
+        <action
+            android:id="@+id/action_results_to_profile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_results_to_home2"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.visionarymindszm.examsresults.fragments.Profile"
+        android:label="Profile" >
+        <action
+            android:id="@+id/action_profile_to_results"
+            app:destination="@id/resultsFragment" />
+    </fragment>
+</navigation>
