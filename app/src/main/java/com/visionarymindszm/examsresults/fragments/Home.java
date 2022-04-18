@@ -93,7 +93,7 @@ public class Home extends Fragment {
     private void populateRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Utils.GET_TOP_TEN_PAST_PAPER,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Utils.PAPER_BASED_CATEGORY,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

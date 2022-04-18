@@ -14,6 +14,8 @@ public class Utils {
 //    public static final String  ROOT_URL = "http://10.0.2.2/exam_api/"; // use this for the emulator
     public static final String LOGIN_URL = ROOT_URL+"?apicall=login";
     public static final String GET_TOP_TEN_PAST_PAPER = ROOT_URL+"?apicall=topTen";
+    public static final String PAPER_CATEGORY = ROOT_URL+"?apicall=paperCategory";
+    public static final String PAPER_BASED_CATEGORY = ROOT_URL+"?apicall=paperBasedOnCategory";
     public static final String SEARCH_PAPER = ROOT_URL +"?apicall=searchPastPaper";
     public static final String GET_RESULTS = ROOT_URL + "?apicall=check_results";
     // Extra
