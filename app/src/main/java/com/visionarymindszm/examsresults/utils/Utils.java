@@ -22,6 +22,7 @@ public class Utils {
     public static final String PDF_URL = "pdf_url";
     public static final String PDF_NAME = "pdf_name";
     public static final String PDF_YEAR = "pdf_year";
+    public static final String PAPER_CATEGORY_EXTRA = "paperCategory";
 
     /**
      *

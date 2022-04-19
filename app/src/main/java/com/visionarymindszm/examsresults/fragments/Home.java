@@ -2,7 +2,6 @@ package com.visionarymindszm.examsresults.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +25,9 @@ import com.android.volley.toolbox.Volley;
 import com.visionarymindszm.examsresults.R;
 import com.visionarymindszm.examsresults.screens.SearchResultsActivity;
 import com.visionarymindszm.examsresults.screens.ViewPaperActivity;
+import com.visionarymindszm.examsresults.screens.ViewPapersCategoryActivity;
+import com.visionarymindszm.examsresults.utils.PaperCategoryAdapter;
+import com.visionarymindszm.examsresults.utils.PaperCategoryModel;
 import com.visionarymindszm.examsresults.utils.PastPaperAdapter;
 import com.visionarymindszm.examsresults.utils.PastPaperModel;
 import com.visionarymindszm.examsresults.utils.Utils;
@@ -42,12 +44,14 @@ public class Home extends Fragment {
     public static final String PAST_PAPER_KEY_ID = "pp_id";
     public static final String PAST_PAPER_KEY_NAME = "paper_name";
     public static final String PAST_PAPER_KEY_YEAR = "paper_year";
+    public static final String CATE_PAPER_KEY_NAME = "paperName";
+    public static final String PAPER_KEY_COUNT = "paperCount";
     public static final String PAST_PAPER_KEY_URL = "paper_url";
     ConstraintLayout home_fragment;
-    private List<PastPaperModel> pastPaperModelList;
-    PastPaperAdapter.RecyclerViewClickListener listener;
+    private List<PaperCategoryModel> pastPaperModelList;
+    PaperCategoryAdapter.RecyclerViewClickListener listener;
     EditText past_paper_search;
-    private String TAG = "HomeFragment";
+    private final String TAG = "HomeFragment";
     public static final String SEARCH_QUERY = "query";
 
     @Nullable
@@ -73,16 +77,11 @@ public class Home extends Fragment {
         });
 
         // open the PDF
-        listener = new PastPaperAdapter.RecyclerViewClickListener() {
-            @Override
-            public void onRowClick(View view, int position) {
-                Intent intent = new Intent(getContext(), ViewPaperActivity.class);
-                intent.putExtra(Utils.PDF_URL, pastPaperModelList.get(position).getPaper_url());
-                intent.putExtra(Utils.PDF_NAME, pastPaperModelList.get(position).getPaper_name());
-                intent.putExtra(Utils.PDF_YEAR, pastPaperModelList.get(position).getPaper_year());
-                startActivity(intent);
+        listener = (view1, position) -> {
+            Intent intent = new Intent(getContext(), ViewPapersCategoryActivity.class);
+            intent.putExtra(Utils.PAPER_CATEGORY_EXTRA, pastPaperModelList.get(position).getPaperCategoryName());
+            startActivity(intent);
 
-            }
         };
 
 
@@ -93,7 +92,7 @@ public class Home extends Fragment {
     private void populateRecycler() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Utils.PAPER_BASED_CATEGORY,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Utils.PAPER_CATEGORY,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -110,10 +109,8 @@ public class Home extends Fragment {
                                 for (int i=0; i < resultData.length(); i++){
                                     JSONObject pastPaperData = resultData.getJSONObject(i);
 
-                                    pastPaperModelList.add(new PastPaperModel(pastPaperData.getString(PAST_PAPER_KEY_NAME),
-                                                            pastPaperData.getString(PAST_PAPER_KEY_YEAR),
-                                                            pastPaperData.getString(PAST_PAPER_KEY_ID),
-                                                             pastPaperData.getString(PAST_PAPER_KEY_URL)
+                                    pastPaperModelList.add(new PaperCategoryModel(pastPaperData.getString(CATE_PAPER_KEY_NAME),
+                                                            pastPaperData.getInt(PAPER_KEY_COUNT)
                                                             ));
                                 }
 
@@ -148,8 +145,8 @@ public class Home extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    private void generateDataList(List<PastPaperModel> pastPaperModelList) {
-        PastPaperAdapter adapter = new PastPaperAdapter(pastPaperModelList, getContext(), listener);
+    private void generateDataList(List<PaperCategoryModel> pastPaperModelList) {
+        PaperCategoryAdapter adapter = new PaperCategoryAdapter(pastPaperModelList, getContext(), listener);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }

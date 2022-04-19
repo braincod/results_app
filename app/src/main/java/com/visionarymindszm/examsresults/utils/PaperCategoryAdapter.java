@@ -22,12 +22,12 @@ import java.util.List;
 
 public class PaperCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    List<PastPaperModel> pastPaperModelList;
+    List<PaperCategoryModel> paperCategoryModelList;
     private Context context;
     private RecyclerViewClickListener mListener;
 
-    public PaperCategoryAdapter(List<PastPaperModel> pastPaperModelList, Context context, RecyclerViewClickListener mListener) {
-        this.pastPaperModelList = pastPaperModelList;
+    public PaperCategoryAdapter(List<PaperCategoryModel> paperCategoryModelList, Context context, RecyclerViewClickListener mListener) {
+        this.paperCategoryModelList = paperCategoryModelList;
         this.context = context;
         this.mListener = mListener;
     }
@@ -43,14 +43,14 @@ public class PaperCategoryAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         PaperCategoryAdapter.PastPaperViewHolder pastPaperViewHolder = (PastPaperViewHolder) holder;
-        pastPaperViewHolder.examPaperName.setText(pastPaperModelList.get(position).getPaper_name());
-        pastPaperViewHolder.examPaperYear.setText(pastPaperModelList.get(position).getPaper_year());
+        pastPaperViewHolder.examPaperName.setText(paperCategoryModelList.get(position).getPaperCategoryName());
+        pastPaperViewHolder.examPaperYear.setText(paperCategoryModelList.get(position).getPaperCount());
     }
 
     // return the size of the List
     @Override
     public int getItemCount() {
-        return pastPaperModelList.size();
+        return paperCategoryModelList.size();
     }
 
 
