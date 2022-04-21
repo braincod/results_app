@@ -104,7 +104,7 @@ public class Home extends Fragment {
                             if (jsonObject.optString("error").equals("false")){
                                 pastPaperModelList = new ArrayList<>();
 
-                                JSONArray resultData =  jsonObject.getJSONArray("top_past_papers");
+                                JSONArray resultData =  jsonObject.getJSONArray("paperCategory");
 
                                 for (int i=0; i < resultData.length(); i++){
                                     JSONObject pastPaperData = resultData.getJSONObject(i);

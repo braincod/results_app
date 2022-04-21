@@ -44,7 +44,7 @@ public class PaperCategoryAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         PaperCategoryAdapter.PastPaperViewHolder pastPaperViewHolder = (PastPaperViewHolder) holder;
         pastPaperViewHolder.examPaperName.setText(paperCategoryModelList.get(position).getPaperCategoryName());
-        pastPaperViewHolder.examPaperYear.setText(paperCategoryModelList.get(position).getPaperCount());
+//        pastPaperViewHolder.examPaperYear.setText(paperCategoryModelList.get(position).getPaperCount());
     }
 
     // return the size of the List

@@ -22,7 +22,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:text="@string/paper_name" />
+             />
 
         <TextView
             android:padding="10dp"
@@ -33,6 +33,6 @@
             android:id="@+id/examPaperYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/intake" />
+             />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
