@@ -14,6 +14,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,7 @@ public class ViewPaperActivity extends AppCompatActivity implements OnPageChange
     String url_pdf;
     String name, year;
     ConstraintLayout view_paper_layout;
+    private ProgressBar progressBarDownload;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,6 @@ public class ViewPaperActivity extends AppCompatActivity implements OnPageChange
         Log.d(TAG, localPath.toString());
         // load the download file on to the screen
 //        pdfView.fromUri(Uri.parse("file://"+localPath.toString())).load();
-        displayFromUri(Uri.parse("file://"+localPath.toString()));
 
     }
     private void displayFromUri(Uri uri) {
@@ -92,6 +94,7 @@ public class ViewPaperActivity extends AppCompatActivity implements OnPageChange
                 Log.d(TAG, "File present");
                 localPath = Uri.parse(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Exams/" + name + "-" + year + ".pdf");
                 Utils.showSnackBar(view_paper_layout, "Loaded from files", -1);
+
             } else {
 
                 DownloadManager downloadManager = (DownloadManager) getApplication().getSystemService(Context.DOWNLOAD_SERVICE);
@@ -111,10 +114,15 @@ public class ViewPaperActivity extends AppCompatActivity implements OnPageChange
                 localPath = Uri.parse(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Exams/" + name + "-" + year + ".pdf");
                 downloadManager.enqueue(request);
 
+
             }
+            progressBarDownload.setVisibility(View.GONE);
+            displayFromUri(Uri.parse("file://"+localPath.toString()));
 
         }catch (Exception e){
             Log.d(TAG, "Error ", e);
+            Utils.showSnackBar(view_paper_layout, "Encountered an error with the download, Check internet and try again", -1);
+
         }
     }
 
