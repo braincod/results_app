@@ -50,6 +50,7 @@ public class ViewPaperActivity extends AppCompatActivity implements OnPageChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_paper);
         Intent intent = getIntent();
+        progressBarDownload = findViewById(R.id.progressBarDownload);
         url_pdf = intent.getStringExtra(Utils.PDF_URL);
         name = intent.getStringExtra(Utils.PDF_NAME);
         year = intent.getStringExtra(Utils.PDF_YEAR);
@@ -57,10 +58,9 @@ public class ViewPaperActivity extends AppCompatActivity implements OnPageChange
         view_paper_layout = findViewById(R.id.view_paper_layout);
         uri  = Uri.parse(Utils.ROOT_URL+url_pdf);
         pdfView = findViewById(R.id.pdfView);
-
+        pdfView.setVisibility(View.GONE);
         downloadFile(Utils.ROOT_URL+url_pdf);
-        String reading="You're reading "+name+"-"+year+".pdf";
-        paperName.setText(reading);
+
         //download(uri);
 
         Log.d(TAG, uri.toString());
@@ -94,6 +94,9 @@ public class ViewPaperActivity extends AppCompatActivity implements OnPageChange
                 Log.d(TAG, "File present");
                 localPath = Uri.parse(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Exams/" + name + "-" + year + ".pdf");
                 Utils.showSnackBar(view_paper_layout, "Loaded from files", -1);
+                progressBarDownload.setVisibility(View.GONE);
+                pdfView.setVisibility(View.VISIBLE);
+                displayFromUri(Uri.parse("file://"+localPath.toString()));
 
             } else {
 
@@ -114,10 +117,11 @@ public class ViewPaperActivity extends AppCompatActivity implements OnPageChange
                 localPath = Uri.parse(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Exams/" + name + "-" + year + ".pdf");
                 downloadManager.enqueue(request);
 
+                progressBarDownload.setVisibility(View.GONE);
+                pdfView.setVisibility(View.VISIBLE);
+                displayFromUri(Uri.parse("file://"+localPath.toString()));
 
             }
-            progressBarDownload.setVisibility(View.GONE);
-            displayFromUri(Uri.parse("file://"+localPath.toString()));
 
         }catch (Exception e){
             Log.d(TAG, "Error ", e);
