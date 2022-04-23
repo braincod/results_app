@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ViewPapersCategoryActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     public static final String PAST_PAPER_KEY_ID = "pp_id";
     public static final String PAST_PAPER_KEY_NAME = "paper_name";
     public static final String PAST_PAPER_KEY_YEAR = "paper_year";
@@ -37,6 +37,7 @@ public class ViewPapersCategoryActivity extends AppCompatActivity {
     private String paperCategory;
     private ConstraintLayout viewPaperCategoryLayout;
     private List<PastPaperModel> pastPaperModelList;
+    private PastPaperAdapter adapter;
     PastPaperAdapter.RecyclerViewClickListener listener;
     private final String TAG = "ViewScreen";
     @Override
@@ -46,6 +47,7 @@ public class ViewPapersCategoryActivity extends AppCompatActivity {
         paperCategory = getIntent().getStringExtra(Utils.PAPER_CATEGORY_EXTRA);
         Log.d(TAG, paperCategory+" "+getIntent().getStringExtra(Utils.PAPER_CATEGORY_EXTRA));
         recyclerView = findViewById(R.id.recyclerPaper);
+
         viewPaperCategoryLayout = findViewById(R.id.viewPaperCategoryLayout);
 //        past_paper_search = findViewById(R.id.past_paper_search);
 //        past_paper_search.setOnClickListener(view -> {
@@ -75,7 +77,6 @@ public class ViewPapersCategoryActivity extends AppCompatActivity {
     }
 
     private void populateRecycler() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Utils.PAPER_BASED_CATEGORY,
                 response -> {
@@ -125,13 +126,17 @@ public class ViewPapersCategoryActivity extends AppCompatActivity {
         };
         // request queue
         //  require context ensures that
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         requestQueue.add(stringRequest);
     }
 
     private void generateDataList(List<PastPaperModel> pastPaperModelList) {
-        PastPaperAdapter adapter = new PastPaperAdapter(pastPaperModelList, this, listener);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        recyclerView.setHasFixedSize(true);
+        adapter = new PastPaperAdapter(pastPaperModelList, getApplicationContext(), listener);
+
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }

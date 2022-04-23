@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/USER/AndroidStudioProjects/results_app/app/src/main/res/layout/activity_view_papers_category.xml" value="0.1" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/results_app/app/src/main/res/layout/home_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/results_app/app/src/main/res/layout/activity_view_paper.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/results_app/app/src/main/res/layout/activity_view_papers_category.xml" value="0.12" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/results_app/app/src/main/res/layout/home_fragment.xml" value="0.33" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/results_app/app/src/main/res/layout/past_paper_card.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/examsresults/app/src/main/res/layout/activity_login.xml" value="0.16032608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/examsresults/app/src/main/res/layout/activity_main.xml" value="0.16" />

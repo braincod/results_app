@@ -122,13 +122,13 @@ public class ViewPaperActivity extends AppCompatActivity implements OnPageChange
     @Override
     public void loadComplete(int nbPages) {
         PdfDocument.Meta meta = pdfView.getDocumentMeta();
-        Log.e(TAG, "title = " + meta.getTitle());
-        Log.e(TAG, "author = " + meta.getAuthor());
-        Log.e(TAG, "subject = " + meta.getSubject());
-        Log.e(TAG, "keywords = " + meta.getKeywords());
-        Log.e(TAG, "creator = " + meta.getCreator());
-        Log.e(TAG, "producer = " + meta.getProducer());
-        Log.e(TAG, "creationDate = " + meta.getCreationDate());
+        Log.i(TAG, "title = " + meta.getTitle());
+        Log.i(TAG, "author = " + meta.getAuthor());
+        Log.i(TAG, "subject = " + meta.getSubject());
+        Log.i(TAG, "keywords = " + meta.getKeywords());
+        Log.i(TAG, "creator = " + meta.getCreator());
+        Log.i(TAG, "producer = " + meta.getProducer());
+        Log.i(TAG, "creationDate = " + meta.getCreationDate());
         Log.d(TAG, "modDate = " + meta.getModDate());
 
     }
